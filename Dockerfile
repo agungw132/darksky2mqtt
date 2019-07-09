@@ -1,0 +1,19 @@
+FROM ubuntu
+
+MAINTAINER Agung Wahyudi <agung.wahyudi@gmail.com>
+
+RUN apt-get update && apt-get install -yq mosquitto-clients curl
+
+COPY . /root
+
+ARG MQTT_HOST
+ARG MQTT_USER
+ARG MQTT_PASSWORD
+ARG MQTT_PORT
+ARG MQTT_TOPIC
+ARG DELAY
+ARG LATITUDE
+ARG LONGITUDE
+ARG API_KEY
+
+ENTRYPOINT /root/getData.sh $API_KEY $LATITUDE $LONGITUDE $MQTT_HOST $MQTT_PORT $MQTT_USER $MQTT_PASSWORD $MQTT_TOPIC $DELAY
